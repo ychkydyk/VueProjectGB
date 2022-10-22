@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png"> 
+    <TaskForm v-on:add="onAdd"></TaskForm>
     <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:data="list"></TaskList>
   </div>
 </template>
 
 <script>
 import TaskList from './components/TaskList.vue'
+import TaskForm from './components/TaskForm.vue'
 
 export default {
   name: 'App',
   components: {
     TaskList,
-  },
+    TaskForm
+},
   data() {
     return {
       list: []
@@ -26,6 +29,10 @@ export default {
     onDone(id) {
       const item = this.list.find((item) => item.id == id)
       item.isDone = !item.isDone
+    },
+    onAdd(category) {
+      this.list.push({id:this.list.length + 1, category, isDone: false})
+      
     }
   },
   created() {
