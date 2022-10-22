@@ -6,7 +6,7 @@
         <span>{{ item.dateCreated }}</span>
         <span>{{ item.category }}</span>
         <span>{{ item.value }}</span>
-        <button type="submit" class="button">Delete</button>
+        <button v-on:click="remove(item.id)">Delete</button>
       </div>
     </div>
 </template>
@@ -18,6 +18,11 @@ export default {
         data: {
             type: Array,
             default: []
+        }
+    },
+    methods: {
+        remove(id) {
+            this.$emit('remove', id)
         }
     }
 }

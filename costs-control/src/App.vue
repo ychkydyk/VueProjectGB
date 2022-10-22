@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png"> 
-    <TaskList v-bind:data="list"></TaskList>
+    <TaskList v-on:remove="onRemove" v-bind:data="list"></TaskList>
   </div>
 </template>
 
@@ -11,11 +11,17 @@ import TaskList from './components/TaskList.vue'
 export default {
   name: 'App',
   components: {
-    TaskList
+    TaskList,
   },
   data() {
     return {
-      list:[]
+      list: []
+    }
+  },
+  methods: {
+    onRemove(id) {
+      const idx = this.list.findIndex((item) => item.id == id)
+      this.list.splice(idx, 1)
     }
   },
   created() {
