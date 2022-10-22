@@ -5,7 +5,7 @@
         <span>{{ item.id }}</span>
         <span>{{ item.dateCreated }}</span>
         <span>{{ item.category }}</span>
-        <span>{{ item.value }}</span>
+        <span>{{ item.amount }}</span>
         <button v-on:click="remove(item.id)">Delete</button>
       </div>
     </div>
