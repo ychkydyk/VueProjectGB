@@ -1,9 +1,9 @@
 <template> 
 <div> 
    
-        <!-- <input class="date"  type="date"/> -->
-        <input class="desc" v-model="newTask" type="text"/>
-        <!-- <input class="amount"  type="number"/> -->
+        <input class="date" v-model="newTaskDate" type="date"/>
+        <input class="desc" v-model="newTaskCat" type="text"/>
+        <input class="amount" v-model="newTaskAmount"  type="number"/>
         <button v-on:click="add">+new</button>
     
 </div>
@@ -14,13 +14,13 @@ export default {
     name: 'TaskForm',
     data() {
         return {
-            newTask: ''
+            newTaskCat: ''
         }
     },
     methods: {
         add() {
-            this.$emit('add', this.newTask)
-            this.newTask = ''
+            this.$emit('add', this.newTaskCat, this.newTaskDate, this.newTaskAmount)
+            this.newTaskCat = ''
         }
     }
 }

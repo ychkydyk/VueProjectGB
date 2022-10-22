@@ -30,8 +30,8 @@ export default {
       const item = this.list.find((item) => item.id == id)
       item.isDone = !item.isDone
     },
-    onAdd(category) {
-      this.list.push({id:this.list.length + 1,dateCreated:'дата', category, amount: 300, isDone: false})
+    onAdd(category, dateCreated, amount) {
+      this.list.push({id:this.list.length + 1,dateCreated, category, amount, isDone: false})
       
     }
   },
