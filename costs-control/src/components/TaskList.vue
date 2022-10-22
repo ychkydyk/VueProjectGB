@@ -1,7 +1,7 @@
 <template>
     <div class="list">
-      <div class="item" v-for="item of data" v-bind:key="item.id">
-        <input type="checkbox"/>
+      <div v-bind:class="{item: true, done:item.isDone}" v-for="item of data" v-bind:key="item.id">
+        <input v-on:change="done(item.id)" type="checkbox" v-bind:checked="item.isDone"/>
         <span>{{ item.id }}</span>
         <span>{{ item.dateCreated }}</span>
         <span>{{ item.category }}</span>
@@ -23,6 +23,9 @@ export default {
     methods: {
         remove(id) {
             this.$emit('remove', id)
+        },
+        done(id) {
+            this.$emit('done', id)
         }
     }
 }
@@ -38,6 +41,13 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .done {
+    color:darkred;
+
+    span {
+        text-decoration: line-through;
+    }
   }
 }
 </style>

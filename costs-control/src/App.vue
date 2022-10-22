@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png"> 
-    <TaskList v-on:remove="onRemove" v-bind:data="list"></TaskList>
+    <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:data="list"></TaskList>
   </div>
 </template>
 
@@ -22,6 +22,10 @@ export default {
     onRemove(id) {
       const idx = this.list.findIndex((item) => item.id == id)
       this.list.splice(idx, 1)
+    },
+    onDone(id) {
+      const item = this.list.find((item) => item.id == id)
+      item.isDone = !item.isDone
     }
   },
   created() {
