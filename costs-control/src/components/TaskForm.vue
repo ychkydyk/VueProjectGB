@@ -20,7 +20,8 @@ export default {
     methods: {
         add() {
             this.$emit('add', this.newTaskCat, this.newTaskDate, this.newTaskAmount)
-            this.newTaskCat = ''
+            this.newTaskCat = '',
+            this.newTaskDate = this.newTaskDate 
         }
     }
 }

@@ -38,9 +38,9 @@ export default {
   created() {
     setTimeout(() => {
       this.list = [
-        {id: 1, dateCreated:'04.20.20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 2, dateCreated:'04.20.20', category: 'Категория 2', amount:420, isDone: true},
-        {id: 3, dateCreated:'04.20.20', category: 'Категория 3', amount:420, isDone: false}
+        {id: 1, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
+        {id: 2, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 3, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false}
       ]
     }, 1000);
   }
