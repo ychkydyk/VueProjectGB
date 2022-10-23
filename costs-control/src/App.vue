@@ -1,8 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png"> 
-    <TaskForm v-on:add="onAdd"></TaskForm>
+    <img alt="Vue logo" src="./assets/logo.png"> <br>
+    <button  v-on:click="visible=!visible" class="button_new-cost">ADD NEW COST +</button>
+    
+
+    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm>
+    <div class="task-list_header">
+    <span>#</span>
+    <span>Date</span>
+    <span>Category</span>
+    <span>Value</span>
+    <span>...</span>
+   </div> 
     <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:data="list"></TaskList>
+    
   </div>
 </template>
 
@@ -18,10 +29,17 @@ export default {
 },
   data() {
     return {
-      list: []
+      list: [],
+      visible: true
     }
   },
+
   methods: {
+    hideInput() {
+    this.inputVisibility = false;
+    // или можно тоггл
+    // this.inputVisibility = !this.inputVisibility;
+  },
     onRemove(id) {
       const idx = this.list.findIndex((item) => item.id == id)
       this.list.splice(idx, 1)
@@ -55,6 +73,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.button_new-cost {
+  padding: 5px;
+  background-color: #0eaba6;
+  color: white;
+  border: none;
 }
 
 </style>
