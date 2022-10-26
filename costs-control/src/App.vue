@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png"> <br>
     <button  v-on:click="visible=!visible" class="button_new-cost">ADD NEW COST +</button>
-    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm> //засунуть кнопку в компонент и переписать логики show как в 1:20:00 3й урок
+    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm>
     <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:listdata="currentElements"></TaskList>
     <Pagination :cur="page" :n="n" :length="list.length" @paginate="onChangePage"/>
     
