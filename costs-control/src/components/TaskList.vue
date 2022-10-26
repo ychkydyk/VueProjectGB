@@ -1,5 +1,12 @@
 <template>
     <div class="list">
+      <div class="task-list_header">
+    <span>#</span>
+    <span>Date</span>
+    <span>Category</span>
+    <span>Value</span>
+    <span>...</span>
+   </div> 
       <div v-bind:class="{item: true, done:item.isDone}" v-for="item of listdata" v-bind:key="item.id">
         <!-- <input v-on:change="done(item.id)" type="checkbox" v-bind:checked="item.isDone"/> -->
         <span class="list-id">#{{ item.id }}</span>
