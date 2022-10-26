@@ -14,7 +14,6 @@
 <script>
 export default {
     name: 'TaskForm',
-    visible: true,
     data() {
         return {
             newTaskCat: '',
@@ -25,8 +24,9 @@ export default {
     methods: {
         add() {
             this.$emit('add', this.newTaskCat, this.newTaskDate, this.newTaskAmount)
-            this.newTaskCat = '',
-            this.newTaskDate = this.newTaskDate 
+            this.newTaskCat = '';
+            this.newTaskDate = this.newTaskDate ;
+            this.newTaskAmount = '';
         }
     }
 }

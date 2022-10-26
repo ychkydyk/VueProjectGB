@@ -1,6 +1,6 @@
 <template>
     <div class="list">
-      <div v-bind:class="{item: true, done:item.isDone}" v-for="item of data" v-bind:key="item.id">
+      <div v-bind:class="{item: true, done:item.isDone}" v-for="item of listdata" v-bind:key="item.id">
         <!-- <input v-on:change="done(item.id)" type="checkbox" v-bind:checked="item.isDone"/> -->
         <span class="list-id">#{{ item.id }}</span>
         <span>{{ item.dateCreated }}</span>
@@ -15,8 +15,8 @@
 export default {
     name: 'TaskList',
     props: {
-        data: {
-            type: Array,
+        listdata: {
+            type: Array, // способ описания пропсов
             default: []
         }
     },

@@ -4,7 +4,7 @@
     <button  v-on:click="visible=!visible" class="button_new-cost">ADD NEW COST +</button>
     
 
-    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm>
+    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm> //засунуть кнопку в компонент и переписать логики show как в 1:20:00 3й урок
     <div class="task-list_header">
     <span>#</span>
     <span>Date</span>
@@ -12,7 +12,7 @@
     <span>Value</span>
     <span>...</span>
    </div> 
-    <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:data="list"></TaskList>
+    <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:listdata="list"></TaskList>
     
   </div>
 </template>
