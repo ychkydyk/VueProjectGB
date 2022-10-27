@@ -5,10 +5,7 @@
     <input placeholder="Payment Category" class="desc" v-model="newTaskCat" type="text"/>
     <input placeholder="Payment Amount" class="amount" v-model="newTaskAmount"  type="number"/>
     <button v-on:click="add">+new</button>
-    
     </div>
-
-
 </template>
 
 <script>

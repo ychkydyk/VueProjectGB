@@ -31,11 +31,9 @@ export default {
   },
   computed: {
 currentElements() {
-
   return this.list.slice(this.n * (this.page - 1), this.n * (this.page - 1) + this.n)
 }
   },
-
   methods: {
     hideInput() {
     this.inputVisibility = false;
@@ -52,7 +50,6 @@ currentElements() {
     },
     onAdd(category, dateCreated, amount) {
       this.list.push({id:this.list.length + 1,dateCreated, category, amount, isDone: false})
-      
     },
     onChangePage(p) {
       this.page = p
@@ -61,41 +58,41 @@ currentElements() {
   created() {
     setTimeout(() => {
       this.list = [
-        {id: 1, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 2, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 1, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: true},
+        {id: 2, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 3, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 4, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 5, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 5, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 6, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 7, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 8, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 8, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 9, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 10, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 11, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 11, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 12, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 13, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 14, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 14, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 15, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 16, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 17, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 17, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 18, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 19, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 20, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 20, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 21, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 22, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 23, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 23, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 24, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 25, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 26, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 26, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 27, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 28, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 29, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 29, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 30, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 31, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 32, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 32, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 33, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         {id: 34, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 35, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
+        {id: 35, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: false},
         {id: 36, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false},
         
 

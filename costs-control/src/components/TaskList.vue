@@ -1,7 +1,7 @@
 <template>
     <div class="list">
       <div class="task-list_header">
-    <span>#</span>
+    <span>id#</span>
     <span>Date</span>
     <span>Category</span>
     <span>Value</span>
@@ -12,7 +12,7 @@
         <span class="list-id">#{{ item.id }}</span>
         <span>{{ item.dateCreated }}</span>
         <span>{{ item.category }}</span>
-        <span>${{ item.amount }}</span>
+        <span>{{ item.amount }}</span>
         <button v-on:click="remove(item.id)">Delete</button>
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {
     }
   }
   .done {
-    color:darkred;
+    color:#0eaba6;
 
     span {
         text-decoration: line-through;
