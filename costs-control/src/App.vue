@@ -3,6 +3,7 @@
    <div class="wrapper">
      <header>My Personal Costs</header>
      <main>
+       Total: {{ getSummAmount }}
        <TaskForm @addNewTask="onAdd"></TaskForm>
      <TaskList :items="payments"></TaskList>
      </main>
@@ -13,6 +14,8 @@
 <script>
 import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
+import { mapMutations, mapGetters } from 'vuex'
+
 export default {
   name: 'App',
   components: {
@@ -21,27 +24,38 @@ export default {
 },
   data() {
     return {
-      payments: []
-    }
+
+    };
+  },
+  computed: {
+    ...mapGetters({
+      getSummAmount: 'getFullPaymentsAmount',
+      payments: 'getPayments'
+
+    }),
   },
 
   methods: {
-      fetchData() {
+    ...mapMutations({
+      setData: 'setPaymentsData',
+      addData: 'addDataToPayments'
+    }),
+    fetchData() {
       return [
         {dateCreated:'2022-04-20', category: 'Категория 1', amount:420},
         {dateCreated:'2022-04-20', category: 'Категория 2', amount:420},
         {dateCreated:'2022-04-20', category: 'Категория 3', amount:420}
       ]
       },
+
     onAdd(data) {
-        this.payments.push(data)
+        this.addData(data)
     }
   },
 
+
   created() {
-    setTimeout(() => {
-      this.payments = this.fetchData()
-    }, 600);
+    this.setData(this.fetchData())
   }
 }
 </script>
