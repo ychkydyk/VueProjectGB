@@ -1,49 +1,52 @@
-<template> 
-
-    <div class="input-block"> 
-    <input v-model="newTaskDate" type="date"/>
-    <input placeholder="Payment Category" class="desc" v-model="newTaskCat" type="text"/>
-    <input placeholder="Payment Amount" class="amount" v-model="newTaskAmount"  type="number"/>
-    <button v-on:click="add">+new</button>
-    
+<template>
+    <div class="task-form">
+      <input placeholder="Date" v-model="date">
+      <input placeholder="Category" v-model="category">
+      <input placeholder="Amount" v-model.number="amount" type="number">
+      <button @click="onSaveClick">Add</button>
     </div>
-
 
 </template>
 
 <script>
+
 export default {
     name: 'TaskForm',
     data() {
         return {
-            newTaskCat: '',
-            newTaskDate: '',
-            newTaskAmount: ''
+          dateCreated: '',
+          category: '',
+          amount: 0
+
         }
     },
-    methods: {
-        add() {
-            this.$emit('add', this.newTaskCat, this.newTaskDate, this.newTaskAmount)
-            this.newTaskCat = '';
-            this.newTaskDate = this.newTaskDate ;
-            this.newTaskAmount = '';
+  computed: {
+      getCurrentDate() {
+        const today = new Date();
+        const d = today.getDate();
+        const m = today.getMonth() + 1;
+        const y = today.getFullYear()
+        return `${d}.${m}.${y}`
+      }
+
+  },
+  methods: {
+    onSaveClick() {
+        const data = {
+          dateCreated: this.dateCreated || this.getCurrentDate,
+          category: this.category,
+          amount: this.amount
         }
-    }
+        this.$emit('addNewTask', data)
+      }
+  }
 }
 </script>
 
 <style lang="scss">
-.task-list_header {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    justify-content: space-between;
-    border: 1px solid darkgray;
-    
-}
-.input-block {
+
+.task-form {
     padding-top: 25px;
-    
     padding-bottom: 30px;
     display: flex;
     flex-direction: column;
@@ -55,17 +58,4 @@ export default {
         width: 33%;
     }
 }
-.add-form {
-    max-width: 33%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-    margin: 0  auto;
-    
-    
-    input {
-        margin-bottom: 10px;
-    }
-}
-
 </style>
