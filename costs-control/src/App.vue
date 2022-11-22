@@ -14,7 +14,7 @@
 <script>
 import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -31,31 +31,25 @@ export default {
     ...mapGetters({
       getSummAmount: 'getFullPaymentsAmount',
       payments: 'getPayments'
-
     }),
   },
-
   methods: {
     ...mapMutations({
       setData: 'setPaymentsData',
       addData: 'addDataToPayments'
     }),
-    fetchData() {
-      return [
-        {dateCreated:'2022-04-20', category: 'Категория 1', amount:420},
-        {dateCreated:'2022-04-20', category: 'Категория 2', amount:420},
-        {dateCreated:'2022-04-20', category: 'Категория 3', amount:420}
-      ]
-      },
+    ...mapActions([
+        'fetchData'
+    ]),
 
     onAdd(data) {
         this.addData(data)
     }
   },
-
-
   created() {
-    this.setData(this.fetchData())
+    this.fetchData()
+    // this.$store.dispatch('fetchData')
+    // this.setData(this.fetchData())
   }
 }
 </script>
