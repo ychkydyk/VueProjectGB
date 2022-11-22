@@ -24,14 +24,13 @@ export default {
 },
   data() {
     return {
-
     };
   },
-  computed: {
+  computed:{
     ...mapGetters({
-      getSummAmount: 'getFullPaymentsAmount',
+      getSummAmount: 'getFullPaymentAmount',
       payments: 'getPayments'
-    }),
+    })
   },
   methods: {
     ...mapMutations({
@@ -41,17 +40,18 @@ export default {
     ...mapActions([
         'fetchData'
     ]),
-
     onAdd(data) {
         this.addData(data)
+
     }
   },
   created() {
     this.fetchData()
+    console.log(this.$store)
     // this.$store.dispatch('fetchData')
     // this.setData(this.fetchData())
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,11 @@
 <template>
     <div class="task-form">
       <input placeholder="Date" v-model="dateCreated">
-      <input placeholder="Category" v-model="category">
+      <select v-model='category'>
+        <option v-for="option in options" :key="option">
+          {{ option }}
+        </option>
+      </select>
       <input placeholder="Amount" v-model.number="amount" type="number">
       <button @click="onSaveClick">Add</button>
     </div>
@@ -11,24 +15,25 @@
 <script>
 
 export default {
-    name: 'TaskForm',
+    name: "TaskForm",
     data() {
         return {
           dateCreated: '',
           category: '',
           amount: 0
-
         }
     },
   computed: {
-      getCurrentDate() {
+      getCurrentDate(){
         const today = new Date();
-        const d = today.getDate();
-        const m = today.getMonth() + 1;
+        const d = today.getDate()
+        const m = today.getMonth() + 1
         const y = today.getFullYear()
         return `${d}.${m}.${y}`
-      }
-
+      },
+    options(){
+        return this.$store.getters.getCategory
+    }
   },
   methods: {
     onSaveClick() {
@@ -39,7 +44,12 @@ export default {
         }
         this.$emit('addNewTask', data)
       }
-  }
+  },
+mounted(){
+      if(!this.category?.length) {
+        this.$store.dispatch('fetchCategory')
+      }
+}
 }
 </script>
 
