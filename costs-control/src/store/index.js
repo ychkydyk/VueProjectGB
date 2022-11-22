@@ -10,6 +10,9 @@ state: {
 mutations: {
     setPaymentsData(state, payload){
         state.payments = payload
+        // Vue.set(state.payments, 0, payload) реактивное изменение данных 1й способ.
+        // state.payments[0] = payload                                     2й способ. - bad
+        // state.payments = [...state.payments]
     },
     addDataToPayments(store, data) {
         store.payments.push(data)
