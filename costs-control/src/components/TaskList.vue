@@ -9,7 +9,6 @@
 <script>
 export default {
     name: 'TaskList',
-
     props: {
       items: {
         type: Array,

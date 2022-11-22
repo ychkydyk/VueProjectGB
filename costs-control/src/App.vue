@@ -5,7 +5,8 @@
      <main>
        Total: {{ getSummAmount }}
        <TaskForm @addNewTask="onAdd"></TaskForm>
-     <TaskList :items="payments"></TaskList>
+     <TaskList :items="currentElements"></TaskList>
+       <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
      </main>
    </div>
   </div>
@@ -14,24 +15,33 @@
 <script>
 import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
-import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex';
+import Pagination from "@/components/Pagination";
 
 export default {
   name: 'App',
   components: {
     TaskForm,
     TaskList,
+    Pagination
 },
   data() {
     return {
+      page:1,
+      n: 10
     };
   },
   computed:{
     ...mapGetters({
       getSummAmount: 'getFullPaymentAmount',
       payments: 'getPayments'
-    })
+    }),
+    currentElements() {
+      const {n,page} = this
+      return this.$store.getters.getPayments.slice(this.n * (this.page-1), this.n * (this.page-1) + this.n)
+    }
   },
+
   methods: {
     ...mapMutations({
       setData: 'setPaymentsData',
@@ -42,8 +52,10 @@ export default {
     ]),
     onAdd(data) {
         this.addData(data)
-
-    }
+    },
+    onPageChange(p) {
+      this.page = p
+    },
   },
   created() {
     this.fetchData()
