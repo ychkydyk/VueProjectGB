@@ -1,6 +1,6 @@
 <template>
     <div class="task-form">
-      <input placeholder="Date" v-model="date">
+      <input placeholder="Date" v-model="dateCreated">
       <input placeholder="Category" v-model="category">
       <input placeholder="Amount" v-model.number="amount" type="number">
       <button @click="onSaveClick">Add</button>
