@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 state: {
-    payments: []
+    payments: [],
+    categoryList: []
 },
 mutations: {
     setPaymentsData(state, payload){
@@ -23,7 +24,7 @@ mutations: {
 },
 
 actions: { // Эмитация загрузки с сервера
-        fetchData({commit, dispatch}) { // в actions можно вызывать другие actions
+        fetchData({commit}) { // в actions можно вызывать другие actions
             return new Promise((resolve)=>{
                 setTimeout(()=>{
                     const items = []
@@ -34,10 +35,10 @@ actions: { // Эмитация загрузки с сервера
                             amount: i
                         })
                     }
-                    resolve (items)
+                    resolve(items)
                 }, 800)
             }).then(res=> {
-                dispatch('fetchCategory')
+                // dispatch('fetchCategory')
                 commit('setPaymentsData', res)
             })
         },
@@ -45,15 +46,16 @@ actions: { // Эмитация загрузки с сервера
         return new Promise((resolve)=>{
             setTimeout(()=>{
                 const items = [ 'Food', 'Transport', 'Internet', 'Sport']
-                resolve (items)
+                resolve(items)
             }, 800)
         }).then(res=> commit('setPaymentsCategory', res))
     }
 },
 getters: {
-    getFullPaymentsAmount: state => {
+    getFullPaymentAmount: state => {
         return state.payments.reduce((res, cur) => res + cur.amount, 0)
     },
-    getPayments: state => state.payments
+    getPayments: state => state.payments,
+    getCategory: state => state.categoryList
 }
 })
