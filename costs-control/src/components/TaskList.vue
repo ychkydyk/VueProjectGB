@@ -1,7 +1,9 @@
 <template>
     <div class="task-list-wrapper">
       <div class="item" v-for="(item, idx) in items" :key="idx">
-        {{ item }}
+        <p>{{item.dateCreated}}</p>
+        <p>{{item.category}}</p>
+        <p>{{item.amount }}$</p>
       </div>
       </div>
 </template>
@@ -21,7 +23,7 @@ export default {
 <style lang="scss">
 
 .task-list-wrapper {
-  max-width: 600px;
+  max-width: 75%;
   margin: 0 auto;
   border: 1px solid darkgray;
 }

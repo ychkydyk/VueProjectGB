@@ -1,13 +1,13 @@
 <template>
     <div class="wrp">
-      <div @click="onClick(cur - 1)">-</div>
+      <div class="prevBtn" @click="onClick(cur - 1)">prev</div>
       <div v-for="page in amountPages"
       :key="page"
       @click="onClick(page)"
       :class="{active: page === cur}">
         {{ page }}
       </div>
-      <div @click="onClick(cur + 1)">+</div>
+      <div class="next-btn" @click="onClick(cur + 1)">next</div>
     </div>
 </template>
 
@@ -38,7 +38,14 @@ export default {
 <style scoped lang="scss">
 .wrp {
   display: flex;
+  justify-content: center;
   & > div {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     padding: 10px;
     &.active {
       background: #ccc;
