@@ -25,7 +25,10 @@ export default {
 .task-list-wrapper {
   max-width: 75%;
   margin: 0 auto;
-  border: 1px solid darkgray;
+  margin-top: 20px;
+  padding: 0 25px 0 25px;
+  border-radius: 15px;
+  background-color: #cccccc;
 }
   .item {
     display: flex;

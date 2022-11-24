@@ -1,11 +1,12 @@
 <template>
   <div id="app">
    <div class="wrapper">
-     <header>My Personal Costs</header>
+     <header class="head-title">My Personal Costs</header>
      <main>
        Total: {{ getSummAmount }}
-       <TaskForm @addNewTask="onAdd"></TaskForm>
-     <TaskList :items="currentElements"></TaskList>
+       <TaskForm v-if="isTaskFormActive" @close="closeTaskForm" @addNewTask="onAdd"></TaskForm>
+       <button @click="showTaskForm">Add new</button>
+       <TaskList :items="currentElements"></TaskList>
        <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
      </main>
    </div>
@@ -28,7 +29,8 @@ export default {
   data() {
     return {
       page:1,
-      n: 10
+      n: 10,
+      isTaskFormActive: false,
     };
   },
   computed:{
@@ -56,6 +58,12 @@ export default {
     onPageChange(p) {
       this.page = p
     },
+    showTaskForm() {
+      this.isTaskFormActive = true
+    },
+    closeTaskForm() {
+      this.isTaskFormActive = false
+    }
   },
   created() {
     this.fetchData()
@@ -75,5 +83,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.head-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
 
 </style>
