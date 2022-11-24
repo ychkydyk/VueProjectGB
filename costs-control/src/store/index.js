@@ -28,7 +28,7 @@ actions: { // Эмитация загрузки с сервера
             return new Promise((resolve)=>{
                 setTimeout(()=>{
                     const items = []
-                    for(let i = 1; i < 20 ; i++){
+                    for(let i = 420; i < 440 ; i++){
                         items.push({
                             dateCreated: '01.01.2023',
                             category: 'Food',
