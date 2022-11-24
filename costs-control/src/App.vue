@@ -5,7 +5,7 @@
      <main>
        Total: {{ getSummAmount }}
        <TaskForm v-if="isTaskFormActive" @close="closeTaskForm" @addNewTask="onAdd"></TaskForm>
-       <button @click="showTaskForm">Add new</button>
+       <button  @click="showTaskForm">Add new</button>
        <TaskList :items="currentElements"></TaskList>
        <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
      </main>

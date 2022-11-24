@@ -79,7 +79,7 @@ mounted(){
         width: 33%;
     }
   .category-select {
-    width: 60%;
+    width: 57%;
     margin: 10px;
   }
 }
