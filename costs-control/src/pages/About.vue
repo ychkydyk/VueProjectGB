@@ -1,11 +1,12 @@
-<template>,<div>
-  About Project
-</div>
+<template>
+  <div>
+    About Project
+  </div>
 </template>
 
 <script>
 export default {
-  name: "AboutPage"
+  name: "About"
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="dash-title">My Personal Costs</div>
     Total: {{ getSummAmount }}
     <TaskForm v-if="isTaskFormActive" @close="closeTaskForm" @addNewTask="onAdd"></TaskForm>
     <button  @click="showTaskForm">Add new</button>
@@ -15,11 +16,11 @@ import { mapMutations, mapGetters, mapActions } from 'vuex';
 import Pagination from "@/components/Pagination";
 
 export default {
-  name: "DashboardPage",
+  name: "Dashboard",
   components: {
     TaskForm,
     TaskList,
-    Pagination
+    Pagination,
   },
   data() {
     return {
@@ -68,6 +69,10 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
+.dash-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
 </style>

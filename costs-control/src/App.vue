@@ -1,22 +1,33 @@
 <template>
   <div id="app">
-   <div class="wrapper">
-     <header class="head-title">My Personal Costs</header>
+
+     <header>
+      <nav>
+        <router-link class="router-link" to="dashboard"> Dashboard </router-link>
+        <router-link class="router-link" to="about"> About </router-link>
+        <router-link class="router-link" to="notfound"> Not Found </router-link>
+      </nav>
+     </header>
      <main>
-      <DashboardPage/>
+
+       <router-view/>
      </main>
    </div>
-  </div>
 </template>
 
 <script>
 
 
-import DashboardPage from "@/pages/DasboardPage";
 export default {
   name: 'App',
-  components: {DashboardPage},
-  data: () =>({}),
+  data: () =>({
+    page: 'dashboard',
+    }),
+  methods: {
+
+  },
+  mounted() {
+  },
 };
 </script>
 
@@ -29,10 +40,15 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.head-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.router-link {
+  padding: 5px;
+
+
 }
+  nav {
+  margin-bottom: 15px;
+}
+
 
 
 </style>
