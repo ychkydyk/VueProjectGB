@@ -42,8 +42,9 @@ export default {
 }
 .router-link {
   padding: 5px;
-
-
+}
+.router-link:visited {
+  color: #00f;
 }
   nav {
   margin-bottom: 15px;

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Dashboard from "@/pages/Dashboard.vue";
-import About from "@/pages/About.vue";
-import NotFound from "@/pages/NotFound.vue";
+// import Dashboard from "@/pages/Dashboard.vue";
+// import About from "@/pages/About.vue";
+// import NotFound from "@/pages/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -12,17 +12,17 @@ const router = new VueRouter({
         {
         path: '/dashboard',
         name: 'dashboard',
-        component: Dashboard,
+        component: () => import('@/pages/Dashboard.vue')
         },
         {
             path: '/about',
             name: 'about',
-            component: About,
+            component: () => import('@/pages/About.vue')
         },
         {
             path: '/notfound',
             name: 'notfound',
-            component: NotFound,
+            component: () => import('@/pages/NotFound.vue')
         },
     ]
 });
