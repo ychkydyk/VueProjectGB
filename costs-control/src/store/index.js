@@ -52,7 +52,9 @@ actions: { // Эмитация загрузки с сервера
     }
 },
 getters: {
-
+    getFullPaymentAmount: state => {
+        return state.payments.reduce((res, cur) => res + cur.amount, 0)
+    },
     getPayments: state => state.payments,
     getCategory: state => state.categoryList
 }

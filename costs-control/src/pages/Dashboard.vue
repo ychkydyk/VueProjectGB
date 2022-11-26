@@ -1,5 +1,6 @@
 <template>
   <div>
+    Total: {{ getSummAmount }}
     <TaskForm></TaskForm>
     <button  @click="$modal.show('add')">Add new</button>
     <TaskList :items="currentElements"></TaskList>
@@ -29,7 +30,8 @@ export default {
   },
   computed: {
       ...mapGetters({
-      payments: 'getPayments'
+      payments: 'getPayments',
+        getSummAmount: 'getFullPaymentAmount'
     }),
     currentElements() {
       const {n,page} = this
