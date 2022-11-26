@@ -1,5 +1,7 @@
 <template>
-    <div class="task-form">
+
+  <transition name="fade">
+    <div v-if="isShown" class="task-form">
       <div class="form-inputs">
         <input placeholder="Date" v-model="dateCreated">
         <select class="category-select"  v-model='category'>
@@ -11,10 +13,10 @@
       </div>
       <div class="btn-group">
         <button @click="onSaveClick">Add</button>
-        <button v-on:click="$emit('close')">Close</button>
+        <button v-on:click="$modal.hide('add')">Close</button>
       </div>
     </div>
-
+  </transition>
 </template>
 
 <script>
@@ -25,7 +27,9 @@ export default {
         return {
           dateCreated: '',
           category: '',
-          amount: 0
+          amount: 0,
+          isShown: false,
+          shownId: 'add'
         }
     },
   computed: {
@@ -41,6 +45,17 @@ export default {
     }
   },
   methods: {
+    show(shownId) {
+      if(shownId === this.shownId) {
+        this.isShown = true
+      }
+    },
+    hide(shownId) {
+      if(shownId === this.shownId) {
+        this.isShown = false
+      }
+    },
+
     onSaveClick() {
         const data = {
           dateCreated: this.dateCreated || this.getCurrentDate,
@@ -51,6 +66,8 @@ export default {
       }
   },
 mounted(){
+    this.$modal.EventBus.$on('modalShow', this.show)
+    this.$modal.EventBus.$on('modalHide', this.hide)
       if(!this.category?.length) {
         this.$store.dispatch('fetchCategory')
       }
@@ -90,5 +107,14 @@ mounted(){
     margin-left:10px;
   }
 
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to, .fade-leave {
+  opacity: 1;
 }
 </style>

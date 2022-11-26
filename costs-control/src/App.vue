@@ -1,15 +1,13 @@
 <template>
   <div id="app">
-
      <header>
-      <nav>
-        <router-link class="router-link" to="dashboard"> Dashboard </router-link>
-        <router-link class="router-link" to="about"> About </router-link>
-        <router-link class="router-link" to="notfound"> Not Found </router-link>
-      </nav>
+        <nav>
+          <router-link class="router-link" to="dashboard"> Dashboard </router-link>
+          <router-link class="router-link" to="about"> About </router-link>
+          <router-link class="router-link" to="notfound"> Not Found </router-link>
+        </nav>
      </header>
      <main>
-
        <router-view/>
      </main>
    </div>
@@ -20,12 +18,15 @@
 
 export default {
   name: 'App',
+
   data: () =>({
     page: 'dashboard',
     }),
+
   methods: {
 
   },
+
   mounted() {
   },
 };
@@ -49,7 +50,5 @@ export default {
   nav {
   margin-bottom: 15px;
 }
-
-
 
 </style>

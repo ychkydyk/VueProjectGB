@@ -2,8 +2,8 @@
   <div>
     <div class="dash-title">My Personal Costs</div>
     Total: {{ getSummAmount }}
-    <TaskForm v-if="isTaskFormActive" @close="closeTaskForm" @addNewTask="onAdd"></TaskForm>
-    <button  @click="showTaskForm">Add new</button>
+    <TaskForm @addNewTask="onAdd"></TaskForm>
+    <button  @click="$modal.show('add')">Add new</button>
     <TaskList :items="currentElements"></TaskList>
     <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
   </div>
@@ -26,7 +26,6 @@ export default {
     return {
       page:1,
       n: 10,
-      isTaskFormActive: false,
     };
   },
   computed: {
@@ -52,12 +51,7 @@ export default {
     onPageChange(p) {
       this.page = p
     },
-    showTaskForm() {
-      this.isTaskFormActive = true
-    },
-    closeTaskForm() {
-      this.isTaskFormActive = false
-    }
+
   },
   created() {
     this.fetchData()
