@@ -1,8 +1,7 @@
 <template>
-
   <transition name="fade">
     <div v-if="isShown" class="modal-window">
-        <button v-on:click="$modal.hide('add')">Close</button>
+        <button v-on:click="hide()">Close</button>
       <TaskFormAdd/>
     </div>
   </transition>
@@ -26,16 +25,14 @@ export default {
         this.isShown = true
       }
     },
-    hide(shownId) {
-      if(shownId === this.shownId) {
+    hide() {
         this.isShown = false
-      }
+
     },
   },
 mounted(){
     this.$modal.EventBus.$on('modalShow', this.show)
     this.$modal.EventBus.$on('modalHide', this.hide)
-
 }
 }
 </script>
