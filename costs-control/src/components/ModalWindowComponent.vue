@@ -1,7 +1,7 @@
 <template>
 
   <transition name="fade">
-    <div v-if="isShown" class="task-form">
+    <div v-if="isShown" class="modal-window">
         <button v-on:click="$modal.hide('add')">Close</button>
       <TaskFormAdd/>
     </div>
@@ -12,7 +12,7 @@
 
 import TaskFormAdd from "@/components/TaskFormAdd";
 export default {
-    name: "TaskForm",
+    name: "ModalWindowComponent",
   components: {TaskFormAdd},
   data() {
         return {
@@ -20,7 +20,6 @@ export default {
           shownId: 'add'
         }
     },
-
   methods: {
     show(shownId) {
       if(shownId === this.shownId) {
@@ -32,8 +31,6 @@ export default {
         this.isShown = false
       }
     },
-
-
   },
 mounted(){
     this.$modal.EventBus.$on('modalShow', this.show)
@@ -45,7 +42,7 @@ mounted(){
 
 <style lang="scss">
 
-.task-form {
+.modal-window {
   position: absolute;
   background-color: white;
   top: 15%;
@@ -63,25 +60,16 @@ mounted(){
     .button {
         width: 33%;
     }
-  .category-select {
-    width: 57%;
-    margin: 10px;
-  }
 }
-.btn-group {
-  margin-top:20px;
-  display: flex;
-  :last-child {
-    margin-left:10px;
-  }
 
-}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
 .fade-enter-to, .fade-leave {
   opacity: 1;
 }
