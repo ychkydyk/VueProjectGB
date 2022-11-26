@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="dash-title">My Personal Costs</div>
-    Total: {{ getSummAmount }}
-    <TaskForm @addNewTask="onAdd"></TaskForm>
+    <TaskForm></TaskForm>
     <button  @click="$modal.show('add')">Add new</button>
     <TaskList :items="currentElements"></TaskList>
     <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
@@ -14,6 +12,7 @@ import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
 import { mapMutations, mapGetters, mapActions } from 'vuex';
 import Pagination from "@/components/Pagination";
+
 
 export default {
   name: "Dashboard",
@@ -30,7 +29,6 @@ export default {
   },
   computed: {
       ...mapGetters({
-      getSummAmount: 'getFullPaymentAmount',
       payments: 'getPayments'
     }),
     currentElements() {
@@ -39,25 +37,18 @@ export default {
     }},
   methods: {
     ...mapMutations({
-      setData: 'setPaymentsData',
       addData: 'addDataToPayments'
     }),
     ...mapActions([
       'fetchData'
     ]),
-    onAdd(data) {
-      this.addData(data)
-    },
     onPageChange(p) {
       this.page = p
-    },
-
+    }
   },
   created() {
     this.fetchData()
     console.log(this.$store)
-    // this.$store.dispatch('fetchData')
-    // this.setData(this.fetchData())
   }
 };
 

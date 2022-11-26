@@ -2,48 +2,25 @@
 
   <transition name="fade">
     <div v-if="isShown" class="task-form">
-      <div class="form-inputs">
-        <input placeholder="Date" v-model="dateCreated">
-        <select class="category-select"  v-model='category'>
-          <option v-for="option in options" :key="option">
-            {{ option }}
-          </option>
-        </select>
-        <input placeholder="Amount" v-model.number="amount" type="number">
-      </div>
-      <div class="btn-group">
-        <button @click="onSaveClick">Add</button>
         <button v-on:click="$modal.hide('add')">Close</button>
-      </div>
+      <TaskFormAdd/>
     </div>
   </transition>
 </template>
 
 <script>
 
+import TaskFormAdd from "@/components/TaskFormAdd";
 export default {
     name: "TaskForm",
-    data() {
+  components: {TaskFormAdd},
+  data() {
         return {
-          dateCreated: '',
-          category: '',
-          amount: 0,
           isShown: false,
           shownId: 'add'
         }
     },
-  computed: {
-      getCurrentDate(){
-        const today = new Date();
-        const d = today.getDate()
-        const m = today.getMonth() + 1
-        const y = today.getFullYear()
-        return `${d}.${m}.${y}`
-      },
-    options(){
-        return this.$store.getters.getCategory
-    }
-  },
+
   methods: {
     show(shownId) {
       if(shownId === this.shownId) {
@@ -56,21 +33,12 @@ export default {
       }
     },
 
-    onSaveClick() {
-        const data = {
-          dateCreated: this.dateCreated || this.getCurrentDate,
-          category: this.category,
-          amount: this.amount
-        }
-        this.$emit('addNewTask', data)
-      }
+
   },
 mounted(){
     this.$modal.EventBus.$on('modalShow', this.show)
     this.$modal.EventBus.$on('modalHide', this.hide)
-      if(!this.category?.length) {
-        this.$store.dispatch('fetchCategory')
-      }
+
 }
 }
 </script>
