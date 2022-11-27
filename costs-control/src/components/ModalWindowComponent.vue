@@ -16,12 +16,12 @@ export default {
   data() {
         return {
           isShown: false,
-          shownId: 'add'
+          settings: 'add'
         }
     },
   methods: {
-    show(shownId) {
-      if(shownId === this.shownId) {
+    show(settings) {
+      if(settings === this.settings) {
         this.isShown = true
       }
     },

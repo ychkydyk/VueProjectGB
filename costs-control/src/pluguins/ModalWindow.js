@@ -8,11 +8,11 @@ export default {
         Vue.prototype.$modal = {
             EventBus: new Vue(),
 
-            show(modalId) {
-                this.EventBus.$emit('modalShow', modalId)
+            show(settings) {
+                this.EventBus.$emit('modalShow', settings)
             },
-            hide(modalId) {
-                this.EventBus.$emit('modalHide', modalId)
+            hide(settings) {
+                this.EventBus.$emit('modalHide', settings)
             }
         }
     }
