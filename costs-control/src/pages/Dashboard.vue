@@ -9,7 +9,6 @@
 
 <script>
 import TaskList from "@/components/TaskList";
-
 import { mapMutations, mapGetters, mapActions } from 'vuex';
 import Pagination from "@/components/Pagination";
 

@@ -1,6 +1,7 @@
 <template>
     <div class="task-list-wrapper">
       <div class="item" v-for="(item, idx) in items" :key="idx">
+        <p>{{item.id}}</p>
         <p>{{item.dateCreated}}</p>
         <p>{{item.category}}</p>
         <p>{{item.amount }}$</p>

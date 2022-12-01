@@ -18,6 +18,7 @@ export default {
   name: "TaskFormAdd",
   data() {
     return {
+      id: '',
       dateCreated: '',
       category: '',
       amount: 0,
@@ -33,6 +34,7 @@ export default {
     },
     options(){
       return this.$store.getters.getCategory
+
     }
   },
   methods: {
@@ -42,6 +44,7 @@ export default {
     }),
     onSaveClick() {
       const data = {
+        id: (this.$store.getters.getId +1 ),
         dateCreated: this.dateCreated || this.getCurrentDate,
         category: this.category,
         amount: this.amount

@@ -28,8 +28,9 @@ actions: { // Эмитация загрузки с сервера
             return new Promise((resolve)=>{
                 setTimeout(()=>{
                     const items = []
-                    for(let i = 420; i < 440 ; i++){
+                    for(let i = 1; i < 21 ; i++){
                         items.push({
+                            id: (items.length + 1),
                             dateCreated: '01.01.2023',
                             category: 'Food',
                             amount: i
@@ -56,6 +57,9 @@ getters: {
         return state.payments.reduce((res, cur) => res + cur.amount, 0)
     },
     getPayments: state => state.payments,
-    getCategory: state => state.categoryList
+    getCategory: state => state.categoryList,
+    getId: state => {
+        return (state.payments.length + 1)
+    },
 }
 })
