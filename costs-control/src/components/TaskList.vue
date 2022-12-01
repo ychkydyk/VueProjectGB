@@ -1,57 +1,57 @@
 <template>
-    <div class="list">
-      <div v-bind:class="{item: true, done:item.isDone}" v-for="item of listdata" v-bind:key="item.id">
-        <!-- <input v-on:change="done(item.id)" type="checkbox" v-bind:checked="item.isDone"/> -->
-        <span class="list-id">#{{ item.id }}</span>
-        <span>{{ item.dateCreated }}</span>
-        <span>{{ item.category }}</span>
-        <span>${{ item.amount }}</span>
-        <button v-on:click="remove(item.id)">Delete</button>
+    <div class="task-list-wrapper">
+      <div class="item" v-for="(item, idx) in items" :key="idx">
+        <p>{{item.id}}</p>
+        <p>{{item.dateCreated}}</p>
+        <p>{{item.category}}</p>
+        <p>{{item.amount }}$</p>
+        <span class="dot" @click="callContextMenu($event, item)" >&#10247;</span>
+        <ContextMenu></ContextMenu>
       </div>
-    </div>
+      </div>
 </template>
 
 <script>
+import ContextMenu from "./ContextMenu.vue";
 export default {
     name: 'TaskList',
+  components: {
+    ContextMenu,
+  },
     props: {
-        listdata: {
-            type: Array, // способ описания пропсов
-            default: []
-        }
+      items: {
+        type: Array,
+        default: ()=>([])
+      }
     },
-    methods: {
-        remove(id) {
-            this.$emit('remove', id)
-        },
-        done(id) {
-            this.$emit('done', id)
-        }
-    }
+  mounted() {
+    this.$context.EventEmitter.$on("show", this.show);
+  },
+  methods: {
+    callContextMenu(event, item) {
+      this.$context.show(event.currentTarget,item); // event.currentTarget для определения текущего элемента, на котором сработал event
+
+    },
+  }
 }
 </script>
 
 <style lang="scss">
 
-.list {
-  max-width: 600px;
+.task-list-wrapper {
+  max-width: 75%;
   margin: 0 auto;
-  border: 1px solid darkgray;
-
+  margin-top: 20px;
+  padding: 0 25px 0 25px;
+  border-radius: 15px;
+  background-color: #cccccc;
+}
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .list-id {
-      width: 40px
-    }
-  }
-  .done {
-    color:darkred;
 
-    span {
-        text-decoration: line-through;
-    }
   }
-}
+
+
 </style>
