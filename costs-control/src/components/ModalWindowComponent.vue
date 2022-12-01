@@ -1,28 +1,25 @@
 <template>
-  <transition name="fade">
     <div v-if="componentName" class="modal-window">
-      <div class="header">
-        {{ settings.title }}
-      </div>
-      <div class="content">
-        <task-form-add v-if="componentName === 'TaskFormAdd'"/>
-        <auth-form v-if="componentName === 'AuthForm'"/>
-      </div>
-      <div class="footer">
-        <button @click="onClose">Close</button>
-      </div>
-
+        <div class="header">
+          {{ settings.title }}
+        </div>
+        <div class="content">
+          <component :is="componentName"/>
+        </div>
+        <div class="footer">
+          <button @click="onClose">Close</button>
+        </div>
     </div>
-  </transition>
 </template>
 
 <script>
 
-import TaskFormAdd from "@/components/TaskFormAdd";
-import AuthForm from "@/components/AuthForm";
 export default {
     name: "ModalWindowComponent",
-  components: {AuthForm, TaskFormAdd},
+  components: {
+    AuthForm:()=>import(/*webpackChunkName:"Auth"*/'@/components/AuthForm'),
+    TaskFormAdd:()=>import(/*webpackChunkName:"TaskFormAdd"*/'@/components/TaskFormAdd')
+  },
   props: {
       componentName: String,
       settings: Object
@@ -58,15 +55,5 @@ export default {
     }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to, .fade-leave {
-  opacity: 1;
-}
 </style>

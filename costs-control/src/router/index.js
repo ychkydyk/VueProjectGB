@@ -1,8 +1,5 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-// import Dashboard from "@/pages/Dashboard.vue";
-// import About from "@/pages/About.vue";
-// import NotFound from "@/pages/NotFound.vue";
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
@@ -10,9 +7,14 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: () => import('@/pages/Dashboard.vue')
+            path: '/dashboard',
+            name: 'dashboard',
+            component: () => import('@/pages/Dashboard.vue')
+        },
+        {
+            path: '/dashboard:page',
+            name: 'Dashboard',
+            component: () => import('@/pages/About.vue')
         },
         {
             path: '/about',

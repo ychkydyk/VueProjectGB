@@ -7,7 +7,9 @@
           <router-link class="router-link" to="notfound"> Not Found </router-link>
         </nav>
      </header>
-<modal-window-component  :componentName="componentName" :settings="modalSettings"/>
+    <transition name="fade">
+        <modal-window-component :componentName="componentName" :settings="modalSettings" v-if="componentName" />
+      </transition>
      <main>
        <router-view/>
      </main>
@@ -15,13 +17,10 @@
 </template>
 
 <script>
-
-
-import ModalWindowComponent from "@/components/ModalWindowComponent";
 export default {
   name: 'App',
   components: {
-    ModalWindowComponent
+    ModalWindowComponent:()=>import(/*webpackChunkName:"Modal"*/'@/components/ModalWindowComponent')
   },
   data: () =>({
     addShowForm: false,
@@ -40,8 +39,6 @@ export default {
       this.modalSettings= {}
       this.componentName = ''
     }
-
-
   },
 
   mounted(){
@@ -69,6 +66,17 @@ export default {
 }
   nav {
   margin-bottom: 15px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave {
+  opacity: 1;
 }
 
 </style>
