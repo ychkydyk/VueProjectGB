@@ -25,7 +25,7 @@ const router = new VueRouter({
             component: () => import('@/pages/NotFound.vue')
         },
         {
-            path: '*',
+            path: '/*',
             // component: () => import('@/pages/NotFound.vue')
             redirect: {
                 name: 'notfound',

@@ -7,6 +7,7 @@
           <router-link class="router-link" to="notfound"> Not Found </router-link>
         </nav>
      </header>
+<modal-window-component  :componentName="componentName" :settings="modalSettings"/>
      <main>
        <router-view/>
      </main>
@@ -16,20 +17,39 @@
 <script>
 
 
+import ModalWindowComponent from "@/components/ModalWindowComponent";
 export default {
   name: 'App',
-
+  components: {
+    ModalWindowComponent
+  },
   data: () =>({
+    addShowForm: false,
+    modalSettings: {},
+    componentName: '',
     page: 'dashboard',
     }),
 
   methods: {
+    onShown(propsData) {
+      const {settings,name} = propsData
+      this.componentName = name
+      this.modalSettings = settings
+      },
+    onHide() {
+      this.modalSettings= {}
+      this.componentName = ''
+    }
+
 
   },
 
-  mounted() {
-  },
-};
+  mounted(){
+    this.$modal.EventBus.$on('shown', this.onShown)
+    this.$modal.EventBus.$on('hide', this.onHide)
+  }
+  };
+
 </script>
 
 <style lang="scss" scoped>

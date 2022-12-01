@@ -1,8 +1,7 @@
 <template>
   <div>
     Total: {{ getSummAmount }}
-    <ModalWindowComponent></ModalWindowComponent>
-    <button  @click="$modal.show('add')">Add new</button>
+    <button  @click="openAddPaymentForm">Add new</button>
     <TaskList :items="currentElements"></TaskList>
     <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
   </div>
@@ -10,7 +9,7 @@
 
 <script>
 import TaskList from "@/components/TaskList";
-import ModalWindowComponent from "@/components/ModalWindowComponent";
+
 import { mapMutations, mapGetters, mapActions } from 'vuex';
 import Pagination from "@/components/Pagination";
 
@@ -18,7 +17,6 @@ import Pagination from "@/components/Pagination";
 export default {
   name: "Dashboard",
   components: {
-    ModalWindowComponent,
     TaskList,
     Pagination,
   },
@@ -46,6 +44,11 @@ export default {
     ]),
     onPageChange(p) {
       this.page = p
+    },
+    openAddPaymentForm() {
+    this.$modal.show('TaskFormAdd', {
+    title: "Add new cost"
+    })
     }
   },
   created() {

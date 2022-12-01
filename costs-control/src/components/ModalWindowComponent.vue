@@ -1,8 +1,17 @@
 <template>
   <transition name="fade">
-    <div v-if="isShown" class="modal-window">
-        <button v-on:click="hide()">Close</button>
-      <TaskFormAdd/>
+    <div v-if="componentName" class="modal-window">
+      <div class="header">
+        {{ settings.title }}
+      </div>
+      <div class="content">
+        <task-form-add v-if="componentName === 'TaskFormAdd'"/>
+        <auth-form v-if="componentName === 'AuthForm'"/>
+      </div>
+      <div class="footer">
+        <button @click="onClose">Close</button>
+      </div>
+
     </div>
   </transition>
 </template>
@@ -10,30 +19,20 @@
 <script>
 
 import TaskFormAdd from "@/components/TaskFormAdd";
+import AuthForm from "@/components/AuthForm";
 export default {
     name: "ModalWindowComponent",
-  components: {TaskFormAdd},
-  data() {
-        return {
-          isShown: false,
-          settings: 'add'
-        }
-    },
-  methods: {
-    show(settings) {
-      if(settings === this.settings) {
-        this.isShown = true
-      }
-    },
-    hide() {
-        this.isShown = false
-
-    },
+  components: {AuthForm, TaskFormAdd},
+  props: {
+      componentName: String,
+      settings: Object
   },
-mounted(){
-    this.$modal.EventBus.$on('modalShow', this.show)
-    this.$modal.EventBus.$on('modalHide', this.hide)
-}
+  methods: {
+  onClose() {
+    this.$modal.hide()
+    }
+  },
+
 }
 </script>
 
