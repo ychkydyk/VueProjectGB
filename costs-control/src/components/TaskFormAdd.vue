@@ -34,7 +34,6 @@ export default {
     },
     options(){
       return this.$store.getters.getCategory
-
     }
   },
   methods: {
@@ -44,7 +43,7 @@ export default {
     }),
     onSaveClick() {
       const data = {
-        id: (this.$store.getters.getId +1 ),
+        id: (this.$store.getters.getId),
         dateCreated: this.dateCreated || this.getCurrentDate,
         category: this.category,
         amount: this.amount
