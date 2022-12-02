@@ -1,5 +1,5 @@
 <template>
-<div class="context" v-if="isShow">
+<div class="context" v-if="isShow" :style="styles">
   <div class="context-item"
        v-for="(item, idx) in items"
        :key="idx"
@@ -16,21 +16,38 @@ export default {
   data() {
     return {
       isShow: false,
-      items: [] //изначально пустой массив, заполняется в зависимости от колличества пунктов в конекстном меню
+      items: [], //изначально пустой массив, заполняется в зависимости от колличества пунктов в конекстном меню
+      xPos: 0,
+      yPos: 0,
     };
   },
   methods: {
     onClick(item) {
        item.action(item)
+      this.$context.close()
     },
-    onShown({items}){
+    onShown({items, caller}){
       this.items = items
       this.isShow = true
+      this.setPosition(caller)
 
     },
     onClose(){
       this.items = []
       this.isShow = false
+    },
+    setPosition(caller){
+       const pos = caller.getBoundingClientRect()
+           this.xPos = pos.left
+          this.yPos = pos.top
+    }
+  },
+  computed: {
+    styles() {
+      return {
+        top: `${this.yPos + 10}px`,
+        left: `${this.xPos + 30}px`
+      }
     }
   },
   mounted() {
