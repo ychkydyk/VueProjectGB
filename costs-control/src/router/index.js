@@ -27,11 +27,12 @@ const router = new VueRouter({
             component: () => import('@/pages/NotFound.vue')
         },
         {
-            path: "/:mode/payment/:category?",
-            name: "form",
-            component: () => import("../pages/Form.page.vue"),
-        },
-
+            path: '/*',
+            // component: () => import('@/pages/NotFound.vue')
+            redirect: {
+                name: 'notfound',
+            },
+        }
     ]
 });
 

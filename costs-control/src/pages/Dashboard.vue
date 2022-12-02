@@ -41,14 +41,6 @@ export default {
     ...mapActions([
       'fetchData'
     ]),
-    show() {
-      this.isShown = true;
-    },
-
-    hide() {
-      this.isShown = false;
-      console.log("hide")
-    },
     onPageChange(p) {
       this.page = p
     },
@@ -57,11 +49,6 @@ export default {
     title: "Add new cost"
     })
     }
-  },
-  mounted() {
-
-      this.$context.EventEmitter.$on("show", this.show);
-      this.$context.EventEmitter.$on("hide", this.hide);
   },
   created() {
     this.fetchData()

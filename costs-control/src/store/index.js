@@ -18,25 +18,14 @@ mutations: {
     setPaymentsCategory(state, payload){
         state.categoryList = payload
     },
-    addDataToPayments(state, data) {
-        state.payments.push(data)
-    },
-    removeCostsList: (state, payload) => state.payments.splice(
-        state.payments.indexOf(payload),
-        1
-    ),
-    editCostsList: (state, payload) => (state.payments = state.payments.map((item) => {
-        if(item.id === payload.id){
-            return payload;
-        } else{
-            return item
-        }
-    }))
+    addDataToPayments(store, data) {
+        store.payments.push(data)
+    }
 },
 
 actions: { // Эмитация загрузки с сервера
-       async fetchData({commit}) { // в actions можно вызывать другие actions
-            await new Promise((resolve)=>{
+        fetchData({commit}) { // в actions можно вызывать другие actions
+            return new Promise((resolve)=>{
                 setTimeout(()=>{
                     const items = []
                     for(let i = 1; i < 21 ; i++){
