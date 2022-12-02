@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from 'vue-router';
 
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -17,6 +18,11 @@ const router = new VueRouter({
             component: () => import('@/pages/About.vue')
         },
         {
+            path: "/:mode/payment/:category?",
+            name: "TaskForm",
+            component: () => import("../components/TaskFormAdd.vue"),
+        },
+        {
             path: '/about',
             name: 'about',
             component: () => import('@/pages/About.vue')
@@ -26,13 +32,13 @@ const router = new VueRouter({
             name: 'notfound',
             component: () => import('@/pages/NotFound.vue')
         },
-        {
-            path: '/*',
-            // component: () => import('@/pages/NotFound.vue')
-            redirect: {
-                name: 'notfound',
-            },
-        }
+        // {
+        //     path: '*',
+        //     // component: () => import('@/pages/NotFound.vue')
+        //     redirect: {
+        //         name: 'notfound',
+        //     },
+        // }
     ]
 });
 

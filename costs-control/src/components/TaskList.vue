@@ -21,8 +21,13 @@ export default {
     },
   methods: {
       editPayment(item) {
-        console.log(item)
+        this.$router.push(`/edit/payment/${item.category}?value=${item.amount}&date=${item.dateCreated}&id=${item.id}`)
       },
+    removePayment(item) {
+      if (item !== undefined) {
+        this.$store.commit("removePaymentList", item)
+      }
+    },
       onClickContextItem(event,item){
         console.log(event)
         const items =  [
@@ -35,7 +40,7 @@ export default {
           {
             text: 'Remove',
             action:()=>{
-              console.log(item, 'remove')
+              this.removePayment(item)
             }
           },
         ]

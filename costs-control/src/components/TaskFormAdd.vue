@@ -8,6 +8,7 @@
     </select>
     <input placeholder="Amount" v-model.number="amount" type="number">
     <button @click="onSaveClick">Add</button>
+    <button @click="onEditClick">Edit</button>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ export default {
   name: "TaskFormAdd",
   data() {
     return {
+      mode: this.$route.params.mode,
       id: '',
       dateCreated: '',
       category: '',
@@ -50,7 +52,15 @@ export default {
         amount: this.amount
       }
       this.addData(data)
-    }
+    },
+    onEditClick() {
+      this.$store.commit('editPaymentList', {
+        id: +this.$route.query.id,
+        category: this.category,
+        amount: this.amount,
+        dateCreated: new Date().toLocaleDateString('ru-RU', { day: "numeric", month: "numeric", year: "numeric", }),
+      })
+    },
   },
   mounted() {
     if(!this.category?.length) {
