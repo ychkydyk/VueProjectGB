@@ -5,6 +5,7 @@
         <p>{{item.dateCreated}}</p>
         <p>{{item.category}}</p>
         <p>{{item.amount }}$</p>
+        <p @click="onClickContextItem($event, item)" class="contextevent">...</p>
       </div>
       </div>
 </template>
@@ -17,8 +18,27 @@ export default {
         type: Array,
         default: ()=>([])
       }
+    },
+  methods: {
+    onClickContextItem(event,item){
+      const items =  [
+        {
+          text: 'Edit',
+          actions:()=>{
+            console.log(item, 'edit') // вставить метод на редактирование
+          }
+        },
+        {
+          text: 'Remove',
+          actions:()=>{
+            console.log(item, 'remove')/// тут вставить метод на удаление
+          }
+        }
+      ]
+      this.$context.show({event, items})
     }
   }
+  };
 </script>
 
 <style lang="scss">

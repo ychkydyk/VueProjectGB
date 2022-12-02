@@ -12,15 +12,20 @@
       </transition>
      <main>
        <router-view/>
+       <transition name="fade">
+         <context-menu-component/>
+       </transition>
      </main>
    </div>
 </template>
 
 <script>
+import ContextMenuComponent from "@/components/ContextMenuComponent";
 export default {
   name: 'App',
   components: {
-    ModalWindowComponent:()=>import(/*webpackChunkName:"Modal"*/'@/components/ModalWindowComponent')
+    ModalWindowComponent:()=>import(/*webpackChunkName:"Modal"*/'@/components/ModalWindowComponent'),
+   ContextMenuComponent
   },
   data: () =>({
     addShowForm: false,
