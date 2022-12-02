@@ -38,15 +38,17 @@ actions: { // Эмитация загрузки с сервера
        async fetchData({commit}) { // в actions можно вызывать другие actions
             await new Promise((resolve)=>{
                 setTimeout(()=>{
-                    const items = []
-                    for(let i = 1; i < 21 ; i++){
-                        items.push({
-                            id: (items.length + 1),
-                            dateCreated: '01.01.2023',
-                            category: 'Food',
-                            amount: i
-                        })
-                    }
+                    const items = [{ id: 1, dateCreated: "20.09.2022", category: "food", amount: 1582 },
+                        { id: 2, dateCreated: "15.09.2022", category: "transport", amount: 245 },
+                        { id: 3, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 4, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 5, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 6, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 7, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 8, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 9, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },
+                        { id: 10, dateCreated: "22.09.2022", category: "healthcare", amount: 780 },]
+
                     resolve(items)
                 }, 800)
             }).then(res=> {
