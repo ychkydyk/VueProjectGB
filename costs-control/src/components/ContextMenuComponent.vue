@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "ContextMenuComponent.vue",
+  name: "ContextMenuComponent",
   data() {
     return {
       isShow: false,
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     onClick(item) {
-      console.log(item);
+       item.action(item)
     },
     onShown({items}){
       this.items = items

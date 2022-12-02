@@ -1,12 +1,12 @@
 <template>
     <div class="task-list-wrapper">
-      <div class="item" v-for="(item, idx) in items" :key="idx">
-        <p>{{item.id}}</p>
-        <p>{{item.dateCreated}}</p>
-        <p>{{item.category}}</p>
-        <p>{{item.amount }}$</p>
-        <p @click="onClickContextItem($event, item)" class="contextevent">...</p>
-      </div>
+        <div class="item" v-for="(item, idx) in items" :key="idx">
+          <p>{{item.id}}</p>
+          <p>{{item.dateCreated}}</p>
+          <p>{{item.category}}</p>
+          <p>{{item.amount }}$</p>
+          <p @click="onClickContextItem($event,item)">...</p>
+        </div>
       </div>
 </template>
 
@@ -16,27 +16,31 @@ export default {
     props: {
       items: {
         type: Array,
-        default: ()=>([])
-      }
+        default: () => [],
+      },
     },
   methods: {
-    onClickContextItem(event,item){
-      const items =  [
-        {
-          text: 'Edit',
-          actions:()=>{
-            console.log(item, 'edit') // вставить метод на редактирование
-          }
-        },
-        {
-          text: 'Remove',
-          actions:()=>{
-            console.log(item, 'remove')/// тут вставить метод на удаление
-          }
-        }
-      ]
-      this.$context.show({event, items})
-    }
+      editPayment(item) {
+        console.log(item)
+      },
+      onClickContextItem(event,item){
+        console.log(event)
+        const items =  [
+          {
+            text: 'Edit',
+            action:()=>{
+              this.editPayment(item)
+            }
+          },
+          {
+            text: 'Remove',
+            action:()=>{
+              console.log(item, 'remove')
+            }
+          },
+        ]
+        this.$context.show({event, items})
+      }
   }
   };
 </script>
