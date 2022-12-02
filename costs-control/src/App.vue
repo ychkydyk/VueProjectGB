@@ -1,71 +1,60 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png"> <br>
-    <button  v-on:click="visible=!visible" class="button_new-cost">ADD NEW COST +</button>
-    
-
-    <TaskForm v-show="!visible"  v-on:add="onAdd"></TaskForm> //засунуть кнопку в компонент и переписать логики show как в 1:20:00 3й урок
-    <div class="task-list_header">
-    <span>#</span>
-    <span>Date</span>
-    <span>Category</span>
-    <span>Value</span>
-    <span>...</span>
-   </div> 
-    <TaskList v-on:done="onDone" v-on:remove="onRemove" v-bind:listdata="list"></TaskList>
-    
-  </div>
+     <header>
+        <nav>
+          <router-link class="router-link" to="dashboard"> Dashboard </router-link>
+          <router-link class="router-link" to="about"> About </router-link>
+          <router-link class="router-link" to="notfound"> Not Found </router-link>
+        </nav>
+     </header>
+    <transition name="fade">
+        <modal-window-component :componentName="componentName" :settings="modalSettings" v-if="componentName" />
+      </transition>
+     <main>
+       <router-view/>
+       <transition name="fade">
+         <context-menu-component/>
+       </transition>
+     </main>
+   </div>
 </template>
 
 <script>
-import TaskList from './components/TaskList.vue'
-import TaskForm from './components/TaskForm.vue'
-
+import ContextMenuComponent from "@/components/ContextMenuComponent";
 export default {
   name: 'App',
   components: {
-    TaskList,
-    TaskForm
-},
-  data() {
-    return {
-      list: [],
-      visible: true
-    }
+    ModalWindowComponent:()=>import(/*webpackChunkName:"Modal"*/'@/components/ModalWindowComponent'),
+   ContextMenuComponent
   },
+  data: () =>({
+    addShowForm: false,
+    modalSettings: {},
+    componentName: '',
+    page: 'dashboard',
+    }),
 
   methods: {
-    hideInput() {
-    this.inputVisibility = false;
-    // или можно тоггл
-    // this.inputVisibility = !this.inputVisibility;
-  },
-    onRemove(id) {
-      const idx = this.list.findIndex((item) => item.id == id)
-      this.list.splice(idx, 1)
-    },
-    onDone(id) {
-      const item = this.list.find((item) => item.id == id)
-      item.isDone = !item.isDone
-    },
-    onAdd(category, dateCreated, amount) {
-      this.list.push({id:this.list.length + 1,dateCreated, category, amount, isDone: false})
-      
+    onShown(propsData) {
+      const {settings,name} = propsData
+      this.componentName = name
+      this.modalSettings = settings
+      },
+    onHide() {
+      this.modalSettings= {}
+      this.componentName = ''
     }
   },
-  created() {
-    setTimeout(() => {
-      this.list = [
-        {id: 1, dateCreated:'2022-04-20', category: 'Категория 1', amount:420, isDone: false},
-        {id: 2, dateCreated:'2022-04-20', category: 'Категория 2', amount:420, isDone: true},
-        {id: 3, dateCreated:'2022-04-20', category: 'Категория 3', amount:420, isDone: false}
-      ]
-    }, 1000);
+
+  mounted(){
+    this.$modal.EventBus.$on('shown', this.onShown)
+    this.$modal.EventBus.$on('hide', this.onHide)
   }
-}
+  };
+
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -74,11 +63,25 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.button_new-cost {
+.router-link {
   padding: 5px;
-  background-color: #0eaba6;
-  color: white;
-  border: none;
+}
+.router-link:visited {
+  color: #00f;
+}
+  nav {
+  margin-bottom: 15px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave {
+  opacity: 1;
 }
 
 </style>

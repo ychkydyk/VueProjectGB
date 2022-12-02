@@ -1,57 +1,71 @@
 <template>
-    <div class="list">
-      <div v-bind:class="{item: true, done:item.isDone}" v-for="item of listdata" v-bind:key="item.id">
-        <!-- <input v-on:change="done(item.id)" type="checkbox" v-bind:checked="item.isDone"/> -->
-        <span class="list-id">#{{ item.id }}</span>
-        <span>{{ item.dateCreated }}</span>
-        <span>{{ item.category }}</span>
-        <span>${{ item.amount }}</span>
-        <button v-on:click="remove(item.id)">Delete</button>
+    <div class="task-list-wrapper">
+        <div class="item" v-for="(item, idx) in items" :key="idx">
+          <p>{{item.id}}</p>
+          <p>{{item.dateCreated}}</p>
+          <p>{{item.category}}</p>
+          <p>{{item.amount }}$</p>
+          <p @click="onClickContextItem($event,item)">...</p>
+        </div>
       </div>
-    </div>
 </template>
 
 <script>
 export default {
     name: 'TaskList',
     props: {
-        listdata: {
-            type: Array, // способ описания пропсов
-            default: []
-        }
+      items: {
+        type: Array,
+        default: () => [],
+      },
     },
-    methods: {
-        remove(id) {
-            this.$emit('remove', id)
-        },
-        done(id) {
-            this.$emit('done', id)
-        }
-    }
-}
+  methods: {
+      editPayment(item) {
+        this.$router.push(`/edit/payment/${item.category}?value=${item.amount}&date=${item.dateCreated}&id=${item.id}`)
+      },
+    removePayment(item) {
+      if (item !== undefined) {
+        this.$store.commit("removePaymentList", item)
+      }
+    },
+      onClickContextItem(event,item){
+        console.log(event)
+        const items =  [
+          {
+            text: 'Edit',
+            action:()=>{
+              this.editPayment(item)
+            }
+          },
+          {
+            text: 'Remove',
+            action:()=>{
+              this.removePayment(item)
+            }
+          },
+        ]
+        this.$context.show({event, items})
+      }
+  }
+  };
 </script>
 
 <style lang="scss">
 
-.list {
-  max-width: 600px;
+.task-list-wrapper {
+  max-width: 75%;
   margin: 0 auto;
-  border: 1px solid darkgray;
-
+  margin-top: 20px;
+  padding: 0 25px 0 25px;
+  border-radius: 15px;
+  background-color: #cccccc;
+}
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .list-id {
-      width: 40px
-    }
-  }
-  .done {
-    color:darkred;
 
-    span {
-        text-decoration: line-through;
-    }
   }
-}
+
+
 </style>
