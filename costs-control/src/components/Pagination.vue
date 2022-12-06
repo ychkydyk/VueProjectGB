@@ -49,8 +49,7 @@ export default {
     padding: 10px;
     &.active {
       background: #ccc;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
+
     }
   }
 }

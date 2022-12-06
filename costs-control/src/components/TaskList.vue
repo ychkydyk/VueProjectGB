@@ -5,18 +5,17 @@
     <v-row>
       <v-col cols="1">#</v-col>
       <v-col cols="4">Date</v-col>
-      <v-col cols="4">Category</v-col>
+      <v-col cols="5">Category</v-col>
       <v-col cols="2">Amount</v-col>
-      <v-col cols="1">...</v-col>
+
     </v-row>
     <v-row v-for="({category, dateCreated, amount}, id) in items"
     :key="id"
     >
       <v-col cols="1">{{ id +1 }}</v-col>
       <v-col cols="4">{{ dateCreated }}</v-col>
-      <v-col cols="4">{{ category }}</v-col>
+      <v-col cols="5">{{ category }}</v-col>
       <v-col cols="2">{{ amount }}</v-col>
-      <v-col cols="1">...</v-col>
     </v-row>
   </v-container>
 <!--    <div class="task-list-wrapper">-->
@@ -40,7 +39,7 @@ export default {
       },
     },
   methods: {
-    
+
       editPayment(item) {
         this.$router.push(`/edit/payment/${item.category}?value=${item.amount}&date=${item.dateCreated}&id=${item.id}`)
       },
