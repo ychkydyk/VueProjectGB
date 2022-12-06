@@ -1,15 +1,11 @@
 <template>
-  <div  class="form-inputs">
-    <input placeholder="Date" v-model="dateCreated">
-    <select class="category-select"  v-model='category'>
-      <option v-for="option in options" :key="option">
-        {{ option }}
-      </option>
-    </select>
-    <input placeholder="Amount" v-model.number="amount" type="number">
-    <button @click="onSaveClick">Add</button>
-    <button @click="onEditClick">Edit</button>
-  </div>
+  <v-card class="text-left pa-6">
+    <v-text-field v-model="dateCreated" label="Date"/>
+    <v-text-field v-model="amount"  type="number" label="Amount"/>
+    <v-select v-model="category" :items="options"/>
+    <v-btn @click="onSaveClick">Add</v-btn>
+<!--    <v-btn @click="onEditClick">Edit</v-btn>-->
+  </v-card>
 </template>
 
 <script>

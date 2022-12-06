@@ -1,26 +1,43 @@
 <template>
-  <div>
-    Total: {{ getSummAmount }}
-    <button  @click="openAddPaymentForm">Add new</button>
-    <TaskList :items="currentElements"></TaskList>
-    <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
-  </div>
+  <v-row>
+    <v-col>
+      <v-dialog v-model="dialog" max-width="50%">
+        <template #activator="{ on }">
+          <v-btn v-on="on" color="green lighten-1" :ripple="false" dark flat>Add new cost <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </template>
+        <v-card>
+          <task-form-add/>
+        </v-card>
+      </v-dialog>
+      <div>
+        <div class="text-h5 text-md-h3">My Personal costs</div>
+        <div class="dash-total">Total: {{ getSummAmount }}</div>
+        <TaskList :items="currentElements"></TaskList>
+        <Pagination :cur="page" :n="n" :length="payments.length" @paginate="onPageChange"/>
+      </div>
+    </v-col>
+    <v-col>График</v-col>
+  </v-row>
 </template>
 
 <script>
 import TaskList from "@/components/TaskList";
 import { mapMutations, mapGetters, mapActions } from 'vuex';
 import Pagination from "@/components/Pagination";
+import TaskFormAdd from "@/components/TaskFormAdd";
 
 
 export default {
   name: "Dashboard",
   components: {
+    TaskFormAdd,
     TaskList,
     Pagination,
   },
   data() {
     return {
+      dialog: false,
       page:1,
       n: 10,
     };
@@ -60,8 +77,4 @@ export default {
 
 <style lang="scss" scoped>
 
-.dash-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
 </style>

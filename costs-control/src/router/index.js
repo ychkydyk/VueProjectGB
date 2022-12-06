@@ -32,13 +32,13 @@ const router = new VueRouter({
             name: 'notfound',
             component: () => import('@/pages/NotFound.vue')
         },
-        // {
-        //     path: '*',
-        //     // component: () => import('@/pages/NotFound.vue')
-        //     redirect: {
-        //         name: 'notfound',
-        //     },
-        // }
+        {
+            path: '*',
+            // component: () => import('@/pages/NotFound.vue')
+            redirect: {
+                name: 'notfound',
+            },
+        }
     ]
 });
 
